@@ -1,0 +1,199 @@
+# filename: config
+# author: benjamin
+# last edited: 09 May, 2025
+# description: i3 config file
+
+set $mod Mod4
+
+# Set Theme Cache
+exec --no-startup-id ~/.config/i3/.scripts/load-default-theme.sh
+#exec --no-startup-id ~/.config/i3/.scripts/load-oak-theme.sh
+
+font pango:monospace 12
+
+# Window title formatting
+for_window [class=".*"] border pixel 3
+for_window [class=".*"] title_format "%title"
+title_align center
+gaps inner 10
+gaps outer 10
+
+# Coloring windows
+# class                 border  backgr. text    indicator child_border
+client.focused          #285577 #285577 #ffffff #285577  #285577
+client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
+client.unfocused        #333333 #222222 #888888 #292d2e   #222222
+client.urgent           #2f343a #900000 #ffffff #900000   #900000
+client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
+client.background       #ffffff
+
+# Set Locker script
+set $Locker ~/.config/i3/.scripts/lock.sh
+bindsym $mod+Shift+x exec --no-startup-id $Locker
+
+# Old way to set locking program
+#set $Locker i3lock -e -i ~/Pictures/bgs/bg.jpg -F --indicator --verif-text="" --wrong-text="" --noinput-text="" --radius 200 --ring-width 12 --ringver-color=00ff0000 --insidever-color=000000CC --insidewrong-color=000000CC --ringwrong-color=772222 --inside-color=000000CC --ring-color=ffffff --keyhl-color=227722 --bshl-color=227722
+
+# Lock Screen on sleep
+exec --no-startup-id bash -c "sleep 20; xss-lock --transfer-sleep-lock -- $Locker"
+
+# Mouse acceleration
+exec --no-startup-id xinput --set-prop 10 "libinput Accel Speed" 0.4
+
+# Touchpad settings
+exec_always --no-startup-id xinput set-prop "ELAN0662:00 04F3:3293 Touchpad" "libinput Natural Scrolling Enabled" 1
+exec_always --no-startup-id xinput set-prop "ELAN0662:00 04F3:3293 Touchpad" "libinput Tapping Enabled" 1
+
+# Brightness control
+bindsym XF86MonBrightnessUp exec brightnessctl set +5%
+bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
+
+# Audio control
+bindsym XF86AudioRaiseVolume exec ~/.config/i3/.scripts/volume-control.sh +5%
+bindsym XF86AudioLowerVolume exec ~/.config/i3/.scripts/volume-control.sh -5%
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+
+# Microphone control
+bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+
+# Define Power Options Mode
+#set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+mode "power" {
+    bindsym l exec --no-startup-id $Locker, mode "default"
+    bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
+    bindsym r exec --no-startup-id systemctl reboot, mode "default"
+    bindsym p exec --no-startup-id systemctl poweroff -i, mode "default"
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+# Activate power options when power button is pressed
+bindsym XF86PowerOff mode "power"
+
+# Window focus and movement bindings
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+bindsym $mod+Shift+b split h
+bindsym $mod+Shift+v split v
+bindsym $mod+f fullscreen toggle
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+space focus mode_toggle
+bindsym $mod+a focus parent
+
+# Workspace and window management
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+
+# Reload and restart i3
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart
+bindsym $mod+Shift+e exec i3-msg exit
+
+mode "resize" {
+
+	bindsym Shift+h resize shrink width 3 px or 3 ppt
+	bindsym Shift+j resize shrink height 3 px or 3 ppt
+	bindsym Shift+k resize grow height 3 px or 3 ppt
+	bindsym Shift+l resize grow width 3 px or 3 ppt
+
+    	bindsym h resize shrink width 10 px or 10 ppt
+    	bindsym j resize shrink height 10 px or 10 ppt
+    	bindsym k resize grow height 10 px or 10 ppt
+    	bindsym l resize grow width 10 px or 10 ppt
+	
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+# Leftclick+mod to drag floating windows
+floating_modifier $mod
+tiling_drag modifier titlebar
+
+# Kill focused window
+bindsym $mod+q kill
+
+# Autostart applications
+exec_always --no-startup-id autotiling
+exec --no-startup-id nm-applet
+exec --no-startup-id picom --config ~/.config/picom/picom.conf
+exec --no-startup-id copyq
+exec --no-startup-id flameshot
+exec --no-startup-id bash -c 'source "$HOME/.cache/i3_theme.env" && polybar mybar &'
+
+# Background Options
+# exec --no-startup-id watch -n 10 ~/.config/i3/.scripts/random-wallpaper.sh
+# exec --no-startup-id feh --bg-fill "~/Pictures/bgs/bg.jpg"
+
+# Set Terminal
+set $term alacritty
+
+# Application Keybinds
+bindsym $mod+Return exec alacritty -e ~/.config/alacritty/.scripts/tmux-start.sh
+bindsym $mod+d exec --no-startup-id ~/.config/i3/.scripts/launch-rofi.sh
+bindsym $mod+t exec --no-startup-id pcmanfm
+bindsym $mod+v exec --no-startup-id librewolf
+bindsym $mod+b exec --no-startup-id ~/.config/i3/.scripts/bluetooth-toggler.sh
+
+# Screenshots with flameshot
+bindsym Print exec --no-startup-id flameshot gui
+bindsym --release Print exec --no-startup-id flameshot gui
+bindsym Shift+Print exec --no-startup-id flameshot gui -c
+bindsym --release Shift+Print exec --no-startup-id flameshot gui -c
+
+# Make "File Upload" dialog float with a fixed size
+for_window [class="LibreWolf" window_role="GtkFileChooserDialog"] floating enable, resize set 1200 1000, move position center
+
