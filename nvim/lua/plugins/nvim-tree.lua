@@ -9,11 +9,6 @@ return {
         side = "right",
       },
       renderer = {
-        icons = {
-          show = {
-            bookmark = false,
-          },
-        },
       },
     })
   end,
