@@ -95,7 +95,7 @@ gaps outer 18
 # Basics:
 #
     # Start a terminal
-    bindsym $mod+Return exec $term -e ~/.config/alacritty/scripts/tmux-start.sh
+    bindsym $mod+Return exec $term -e ~/.config/tmux/tmux-start.sh
 
     # Kill focused window
     bindsym $mod+q kill
