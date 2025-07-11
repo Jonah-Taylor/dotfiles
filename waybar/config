@@ -1,0 +1,122 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 56,
+    "spacing": 4,
+    "modules-left": ["sway/workspaces"],
+    "modules-center": ["sway/window"],
+    "modules-right": ["pulseaudio#microphone", "pulseaudio", "backlight", "battery", "network", "clock"],
+    "swap-icon-label": true,
+
+    
+    "sway/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "format": "{name}",
+        "sort-by-number": true,
+        "persistent_workspaces": {
+            "1": [],
+            "2": [],
+            "3": [],
+            "4": [],
+            "5": [],
+            "6": [],
+            "7": [],
+            "8": [],
+            "9": [],
+            "10": []
+        },
+	"swap-icon-label": true
+
+    },
+    
+    "sway/window": {
+        "format": "{title}",
+        "max-length": 60,
+        "tooltip": false,
+	"swap-icon-label": true
+
+    },
+    
+    "pulseaudio#microphone": {
+        "format": "{format_source}",
+        "format-source": " On",
+        "format-source-muted": "",
+        "on-click": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
+        "tooltip": false,
+	"swap-icon-label": true
+
+    },
+    
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-muted": "",
+        "format-icons": {
+            "headphone": "🎧",
+            "hands-free": "🎧",
+            "headset": "🎧",
+            "phone": "📱",
+            "portable": "📱",
+            "car": "🚗",
+            "default": ["🔈", "🔊", "🔊"]
+        },
+        "tooltip": false,
+	"swap-icon-label": true
+
+    },
+    
+    "backlight": {
+        "device": "intel_backlight",
+        "format": "☀️ {percent}%",
+        "tooltip": false,
+	"swap-icon-label": true
+
+    },
+
+    "battery": {
+        "states": {
+            "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon} {capacity}%",
+        "format-charging": "🔌 {capacity}%",
+        "format-plugged": "🔌 {capacity}%",
+        "format-alt": "{time} {icon}",
+        "format-icons": ["", "", "", "", ""],
+        "tooltip": false,
+	"swap-icon-label": true
+
+    },
+    
+    "network": {
+        "format-wifi": "📶 {signalStrength}%",
+        "format-ethernet": "🌐 Connected",
+        "format-disconnected": "",
+        "tooltip-format": "{ifname}: {ipaddr}/{cidr}",
+        "tooltip-format-wifi": "{essid} ({signalStrength}%): {ipaddr}/{cidr}",
+        "on-click": "nm-connection-editor",
+	"swap-icon-label": true
+    },
+    
+    "clock": {
+        "format": "{:%d - %I:%M}",
+        "format-alt": "📅 {:%Y-%m-%d %H:%M}",
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+        "calendar": {
+            "mode": "year",
+            "mode-mon-col": 3,
+            "weeks-pos": "right",
+            "on-scroll": 1,
+            "format": {
+                "months": "<span color='#ffffff'><b>{}</b></span>",
+                "days": "<span color='#ffffff'><b>{}</b></span>",
+                "weeks": "<span color='#cccccc'><b>W{}</b></span>",
+                "weekdays": "<span color='#ffffff'><b>{}</b></span>",
+                "today": "<span color='#ffaa00'><b><u>{}</u></b></span>"
+            }
+        },
+	"swap-icon-label": true
+
+    }
+}

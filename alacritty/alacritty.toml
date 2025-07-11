@@ -1,0 +1,34 @@
+[window]
+
+# Set the background opacity (range 0.0 to 1.0)
+opacity = 0.85
+
+padding.x = 10
+padding.y = 10
+
+decorations = "Full"
+decorations_theme_variant = "Light" # "Dark"
+
+[scrolling]
+history = 10000  # Increase scrollback buffer
+multiplier = 4   # Adjust scrolling speed (increase for smoother scrolling)
+
+[font]
+normal = { family = "JetBrainsMono Nerd Font", style = "Regular" }
+bold = { family = "JetBrainsMono Nerd Font", style = "Bold" }
+italic = { family = "JetBrainsMono Nerd Font", style = "Italic" }
+#normal.family = "Cascadia Code PL"
+#bold.family = "Cascadia Code PL"
+#italic.family = "Cascadia Code PL"
+#bold_italic.family = "Cascadia Code PL"
+
+size = 18.0
+
+[colors.primary]
+background = "0x000000"  # Black background color
+foreground = "0xffffff"  # White text color
+
+[general]
+import = [
+    "~/.config/alacritty/themes/themes/gruvbox_dark.toml"
+]
