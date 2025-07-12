@@ -25,33 +25,25 @@ set $fman thunar
 # My preferred menu
 set $menu wofi
 # My preferred locking menu
-set $Locker swaylock
+set $locker swaylock
 
 ### Output configuration
-#
-# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 #output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
-#
-# Example configuration:
-#
 output * resolution 2560x1600@90Hz scale 1
- #output HDMI-A-1 resolution 1920x1080 position 1920,0
-#
-# You can get the names of your outputs by running: swaymsg -t get_outputs
 
 ### Idle configuration
-#
-# Example configuration:
-#
-# exec swayidle -w \
-#          timeout 300 'swaylock -f -c 000000' \
-#          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-#          before-sleep 'swaylock -f -c 000000'
-#
+exec swayidle -w \
+         timeout 300 '$locker' \
+         timeout 310 'swaymsg "output * power off"' \
+         resume 'swaymsg "output * power on"' \
+         before-sleep 'sleep 2 && $locker'
+
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
 # resumed. It will also lock your screen before your computer goes to sleep.
+
 # Window title formatting
+exec_always --no-startup-id autotiling
 
 # Default border styles
 default_border pixel 5
@@ -83,29 +75,19 @@ gaps inner 18
 gaps outer 18
 
 ### Input configuration
-#
-# Example configuration:
-#
-   input type:touchpad {
-       dwt enabled
-       tap enabled
-       natural_scroll enabled
-       middle_emulation enabled
-       drag_lock disabled
-   }
-#
-#   input type:keyboard {
-#       xkb_layout "eu"
-#   }
-#
-# You can also configure each device individually.
-# Read `man 5 sway-input` for more information about this section.
+input type:touchpad {
+    dwt enabled
+    tap enabled
+    natural_scroll enabled
+    middle_emulation enabled
+    drag_lock disabled
+}
 
 # Define Power Options Mode
 
 mode "power" {
-    bindsym l exec --no-startup-id $Locker, mode "default"
-    bindsym s exec --no-startup-id "$Locker"; systemctl suspend, mode "default"
+    bindsym l exec --no-startup-id '$locker', mode "default"
+    bindsym s exec --no-startup-id '$locker'; systemctl suspend, mode "default"
     bindsym r exec --no-startup-id systemctl reboot, mode "default"
     bindsym p exec --no-startup-id systemctl poweroff, mode "default"
 
@@ -118,9 +100,7 @@ bindsym XF86PowerOff mode "power"
 
 
 ### Key bindings
-#
-# Basics:
-#
+
     # Start a terminal
     bindsym $mod+Return exec $term -e ~/.config/tmux/tmux-start.sh
 
@@ -137,10 +117,6 @@ bindsym XF86PowerOff mode "power"
     bindsym $mod+t exec $fman
 
     # Drag floating windows by holding down $mod and left mouse button.
-    # Resize them with right mouse button + $mod.
-    # Despite the name, also works for non-floating windows.
-    # Change normal to inverse to use left mouse button for resizing and right
-    # mouse button for dragging.
     floating_modifier $mod normal
 
     # Reload the configuration file
@@ -203,30 +179,21 @@ bindsym XF86PowerOff mode "power"
     bindsym $mod+a focus parent
     bindsym $mod+Shift+minus move scratchpad
     bindsym $mod+minus scratchpad show
-#
+
 # Resizing containers:
-#
 mode "resize" {
-    # left will shrink the containers width
-    # right will grow the containers width
-    # up will shrink the containers height
-    # down will grow the containers height
     bindsym $left resize shrink width 10px
     bindsym $down resize grow height 10px
     bindsym $up resize shrink height 10px
     bindsym $right resize grow width 10px
 
-    # Ditto, with arrow keys
-    bindsym Left resize shrink width 10px
-    bindsym Down resize grow height 10px
-    bindsym Up resize shrink height 10px
-    bindsym Right resize grow width 10px
-
     # Return to default mode
     bindsym Return mode "default"
     bindsym Escape mode "default"
+    bindsym ctrl+c mode "default"
 }
 bindsym $mod+r mode "resize"
+
 #
 # Utilities:
 #
