@@ -98,6 +98,9 @@ mode "power" {
 # Activate power options when power button is pressed
 bindsym XF86PowerOff mode "power"
 
+# Cursor hiding
+seat * hide_cursor 1000
+seat * hide_cursor when-typing enable
 
 ### Key bindings
 
