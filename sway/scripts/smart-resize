@@ -1,0 +1,82 @@
+#!/usr/bin/env python3
+#
+# Copyright 2016 Damien Riegel 
+# Modified for Sway compatibility
+# Fixed for consistent resize speed
+#
+# Licensed under the terms of the GNU GPL v3, or any later version.
+#
+# Resize the focused window depending on its position in the layout
+# Example: bindsym Left exec smart-resize "Left"
+
+import sys
+import i3ipc
+
+DEFAULT_INCREMENT = "10 px"
+
+if len(sys.argv) < 2:
+    sys.exit(-1)
+
+key = sys.argv[1].lower()
+
+if len(sys.argv) == 3:
+    inc = sys.argv[2]
+else:
+    inc = DEFAULT_INCREMENT
+
+def is_at_top_edge(focused):
+    workspace = focused.workspace()
+    # For Sway, check if window is at the top of the workspace
+    return focused.rect.y <= workspace.rect.y
+
+def is_at_bottom_edge(focused):
+    workspace = focused.workspace()
+    # Check if window bottom edge is at workspace bottom
+    return focused.rect.y + focused.rect.height >= workspace.rect.y + workspace.rect.height
+
+def is_at_left_edge(focused):
+    workspace = focused.workspace()
+    # Check if window left edge is at workspace left
+    return focused.rect.x <= workspace.rect.x
+
+def is_at_right_edge(focused):
+    workspace = focused.workspace()
+    # Check if window right edge is at workspace right
+    return focused.rect.x + focused.rect.width >= workspace.rect.x + workspace.rect.width
+
+# Create connection - works for both i3 and Sway
+try:
+    i3 = i3ipc.Connection()
+except:
+    print("Error: Could not connect to Sway/i3. Make sure Sway is running.")
+    sys.exit(-1)
+
+focused = i3.get_tree().find_focused()
+if not focused:
+    print("Error: No focused window found")
+    sys.exit(-1)
+
+# Execute resize commands with consistent increment
+if key == "up":
+    if is_at_top_edge(focused):
+        i3.command("resize shrink down %s" % (inc))
+    else:
+        i3.command("resize grow up %s" % (inc))
+elif key == "down":
+    if is_at_bottom_edge(focused):
+        i3.command("resize shrink up %s" % (inc))
+    else:
+        i3.command("resize grow down %s" % (inc))
+elif key == "right":
+    if is_at_right_edge(focused):
+        i3.command("resize shrink left %s" % (inc))
+    else:
+        i3.command("resize grow right %s" % (inc))
+elif key == "left":
+    if is_at_left_edge(focused):
+        i3.command("resize shrink right %s" % (inc))
+    else:
+        i3.command("resize grow left %s" % (inc))
+else:
+    print(f"Error: Invalid direction '{key}'. Use: up, down, left, right")
+    sys.exit(-1)

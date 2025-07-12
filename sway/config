@@ -185,10 +185,15 @@ seat * hide_cursor when-typing enable
 
 # Resizing containers:
 mode "resize" {
-    bindsym $left resize shrink width 10px
-    bindsym $down resize grow height 10px
-    bindsym $up resize shrink height 10px
-    bindsym $right resize grow width 10px
+    bindsym $left exec --no-startup-id ~/.config/sway/scripts/smart-resize "Left" "60 px"
+    bindsym $down exec --no-startup-id ~/.config/sway/scripts/smart-resize "Down" "60 px"
+    bindsym $up exec --no-startup-id ~/.config/sway/scripts/smart-resize "Up" "60 px"
+    bindsym $right exec --no-startup-id ~/.config/sway/scripts/smart-resize "Right" "60 px"
+    
+    bindsym Shift+$left exec --no-startup-id ~/.config/sway/scripts/smart-resize "Left" "20 px"
+    bindsym Shift+$down exec --no-startup-id ~/.config/sway/scripts/smart-resize "Down" "20 px"
+    bindsym Shift+$up exec --no-startup-id ~/.config/sway/scripts/smart-resize "Up" "20 px"
+    bindsym Shift+$right exec --no-startup-id ~/.config/sway/scripts/smart-resize "Right" "20 px"
 
     # Return to default mode
     bindsym Return mode "default"
