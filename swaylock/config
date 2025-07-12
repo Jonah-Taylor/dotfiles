@@ -18,11 +18,11 @@ indicator-radius=300
 indicator-thickness=30
 
 # Ring colors (white when idle, colors when active)
-ring-color=009900
-ring-clear-color=009900
-ring-caps-lock-color=009900
+ring-color=004400
+ring-clear-color=004400
+ring-caps-lock-color=004400
 ring-ver-color=000000
-ring-wrong-color=009900
+ring-wrong-color=000000
 
 # Inside colors (dark)
 inside-color=000000

@@ -195,6 +195,11 @@ mode "resize" {
     bindsym Shift+$up exec --no-startup-id ~/.config/sway/scripts/smart-resize "Up" "20 px"
     bindsym Shift+$right exec --no-startup-id ~/.config/sway/scripts/smart-resize "Right" "20 px"
 
+    bindsym $mod+$left focus left
+    bindsym $mod+$down focus down
+    bindsym $mod+$up focus up
+    bindsym $mod+$right focus right
+
     # Return to default mode
     bindsym Return mode "default"
     bindsym Escape mode "default"
