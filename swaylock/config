@@ -1,0 +1,59 @@
+daemonize
+#clock
+#timestr=%I:%M %p
+#datestr=%A, %B %d
+
+# Effects
+disable-caps-lock-text
+hide-keyboard-layout
+ignore-empty-password
+
+# Background
+color=000000
+
+# Indicator always visible and positioned
+indicator
+indicator-idle-visible
+indicator-radius=300
+indicator-thickness=30
+
+# Ring colors (white when idle, colors when active)
+ring-color=00ff00
+ring-clear-color=00ff00
+ring-caps-lock-color=00ff00
+ring-ver-color=000000
+ring-wrong-color=00ff00
+
+# Inside colors (dark)
+inside-color=000000
+inside-clear-color=000000
+inside-caps-lock-color=000000
+inside-ver-color=000000
+inside-wrong-color=000000
+
+# Line colors (matches background)
+line-color=000000
+line-clear-color=000000
+line-caps-lock-color=000000
+line-ver-color=000000
+line-wrong-color=000000
+
+# Text colors
+text-color=000000
+text-clear-color=000000
+text-caps-lock-color=000000
+text-ver-color=000000
+text-wrong-color=000000
+
+# Highlight colors
+key-hl-color=000000
+bs-hl-color=000000
+caps-lock-key-hl-color=000000
+caps-lock-bs-hl-color=000000
+
+# Separator
+separator-color=000000
+
+# Font
+font-size=1
+EOF

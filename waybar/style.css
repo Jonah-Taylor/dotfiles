@@ -17,6 +17,13 @@ window#waybar {
     padding-top: 0px;
 }
 
+#mode {
+    background-color: transparent;
+    color: #ffffff;
+    margin: 0 5px;
+    padding: 0 10px;
+}
+
 #workspaces button {
     padding: 0 0px;
     background-color: transparent;

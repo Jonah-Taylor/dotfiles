@@ -3,11 +3,15 @@
     "position": "top",
     "height": 56,
     "spacing": 4,
-    "modules-left": ["sway/workspaces"],
+    "modules-left": ["sway/workspaces", "sway/mode"],
     "modules-center": ["sway/window"],
     "modules-right": ["pulseaudio#microphone", "pulseaudio", "backlight", "battery", "network", "clock"],
     "swap-icon-label": true,
 
+    "sway/mode": {
+        "format": "<span style=\"italic\">{}</span>",
+        "tooltip": false
+    },
     
     "sway/workspaces": {
         "disable-scroll": true,
