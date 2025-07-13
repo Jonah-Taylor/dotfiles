@@ -200,6 +200,11 @@ mode "resize" {
     bindsym $mod+$up focus up
     bindsym $mod+$right focus right
 
+    bindsym $mod+Shift+$left move left
+    bindsym $mod+Shift+$down move down
+    bindsym $mod+Shift+$up move up
+    bindsym $mod+Shift+$right move right
+
     # Return to default mode
     bindsym Return mode "default"
     bindsym Escape mode "default"

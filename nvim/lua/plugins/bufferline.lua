@@ -105,15 +105,15 @@ return {
         },
         modified = {
           bg = '#000000',
-          fg = '#ffcc00',
+          fg = '#ffffff',
         },
         modified_selected = {
           bg = '#404040',
-          fg = '#ffcc00',
+          fg = '#ffffff',
         },
         modified_visible = {
           bg = '#000000',
-          fg = '#ffcc00',
+          fg = '#999900',
         },
         numbers = {
           bg = '#000000',
@@ -175,10 +175,10 @@ return {
     -- Additional useful keybindings
     { '<leader>bp', '<Cmd>BufferLinePick<CR>' },
     { '<leader>bP', '<Cmd>BufferLinePickClose<CR>' },
-    { '<leader>ba', '<Cmd>BufferLineCloseOthers<CR>' },
+    { '<leader>ca', '<Cmd>BufferLineCloseOthers<CR>' },
     { '<leader>br', '<Cmd>BufferLineCloseRight<CR>' },
     { '<leader>bl', '<Cmd>BufferLineCloseLeft<CR>' },
-    { '<leader>bmn', '<Cmd>BufferLineMoveNext<CR>' },
-    { '<leader>bmp', '<Cmd>BufferLineMovePrev<CR>' },
+    { '<leader>cmn', '<Cmd>BufferLineMoveNext<CR>' },
+    { '<leader>cmp', '<Cmd>BufferLineMovePrev<CR>' },
   },
 }
