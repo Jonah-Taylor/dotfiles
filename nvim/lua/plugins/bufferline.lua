@@ -6,13 +6,21 @@ return {
   config = function()
     require('bufferline').setup({
       options = {
-        -- Numbers on tabs
-        numbers = "ordinal",
+        -- Numbers on tabs without dots
+        numbers = function(opts)
+          return string.format('%s', opts.ordinal)
+        end,
         -- Click to go to buffer
         close_command = "bdelete! %d",
         right_mouse_command = "bdelete! %d",
         left_mouse_command = "buffer %d",
         middle_mouse_command = nil,
+
+        bufferline = {
+            animation = true,
+            scrollable = false,  -- Disable scrolling to force fitting
+            auto_toggle_bufferline = false,
+        },
         
         -- Appearance
         indicator = {
@@ -25,18 +33,22 @@ return {
         left_trunc_marker = '',
         right_trunc_marker = '',
         
-        -- Layout
-        max_name_length = 30,
+        -- Layout - Force tabs to shrink dynamically
+        max_name_length = 20,
         max_prefix_length = 15,
-        tab_size = 21,
+        tab_size = 10,  -- Let bufferline calculate size dynamically
+        min_tab_width = 6,  -- Let it shrink as needed
+        enforce_regular_tabs = true,  -- Allow dynamic sizing
+        truncate_names = true,  -- Truncate long names to fit
+        mode = "buffers",  -- Ensure we're in buffer mode (not tabs mode)
         diagnostics = false,
         show_buffer_icons = false,
-        show_buffer_close_icons = true,
+        show_buffer_close_icons = false,  -- Remove close icons to save space
         show_close_icon = false,
         show_tab_indicators = true,
+        show_duplicate_prefix = true,  -- Help distinguish similar names
         persist_buffer_sort = true,
-        separator_style = "thin",
-        enforce_regular_tabs = false,
+        separator_style = "thin",  -- Less space-consuming separators
         always_show_bufferline = true,
         
         -- Sidebar integration
@@ -155,22 +167,33 @@ return {
         },
       },
     })
+
+    -- Custom function to go to buffer by visual position
+    local function go_to_buffer_by_position(pos)
+      local bufferline = require('bufferline')
+      local state = require('bufferline.state')
+      
+      -- Get the visible components
+      if state.components and state.components[pos] then
+        vim.cmd('buffer ' .. state.components[pos].id)
+      end
+    end
+
+    -- Set up keybindings for buffer positions 1-9 (hardcoded)
+    vim.keymap.set('n', '<leader>1', function() go_to_buffer_by_position(1) end, { desc = 'Go to buffer 1', silent = true })
+    vim.keymap.set('n', '<leader>2', function() go_to_buffer_by_position(2) end, { desc = 'Go to buffer 2', silent = true })
+    vim.keymap.set('n', '<leader>3', function() go_to_buffer_by_position(3) end, { desc = 'Go to buffer 3', silent = true })
+    vim.keymap.set('n', '<leader>4', function() go_to_buffer_by_position(4) end, { desc = 'Go to buffer 4', silent = true })
+    vim.keymap.set('n', '<leader>5', function() go_to_buffer_by_position(5) end, { desc = 'Go to buffer 5', silent = true })
+    vim.keymap.set('n', '<leader>6', function() go_to_buffer_by_position(6) end, { desc = 'Go to buffer 6', silent = true })
+    vim.keymap.set('n', '<leader>7', function() go_to_buffer_by_position(7) end, { desc = 'Go to buffer 7', silent = true })
+    vim.keymap.set('n', '<leader>8', function() go_to_buffer_by_position(8) end, { desc = 'Go to buffer 8', silent = true })
+    vim.keymap.set('n', '<leader>9', function() go_to_buffer_by_position(9) end, { desc = 'Go to buffer 9', silent = true })
   end,
   keys = {
     { '<Tab>', '<Cmd>BufferLineCycleNext<CR>' },
     { '<S-Tab>', '<Cmd>BufferLineCyclePrev<CR>' },
     { '<leader>cb', '<Cmd>bd<CR>' },
-    
-    -- Direct buffer access by index
-    { '<leader>1', '<Cmd>BufferLineGoToBuffer 1<CR>' },
-    { '<leader>2', '<Cmd>BufferLineGoToBuffer 2<CR>' },
-    { '<leader>3', '<Cmd>BufferLineGoToBuffer 3<CR>' },
-    { '<leader>4', '<Cmd>BufferLineGoToBuffer 4<CR>' },
-    { '<leader>5', '<Cmd>BufferLineGoToBuffer 5<CR>' },
-    { '<leader>6', '<Cmd>BufferLineGoToBuffer 6<CR>' },
-    { '<leader>7', '<Cmd>BufferLineGoToBuffer 7<CR>' },
-    { '<leader>8', '<Cmd>BufferLineGoToBuffer 8<CR>' },
-    { '<leader>9', '<Cmd>BufferLineGoToBuffer 9<CR>' },
     
     -- Additional useful keybindings
     { '<leader>bp', '<Cmd>BufferLinePick<CR>' },

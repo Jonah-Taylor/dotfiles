@@ -22,8 +22,11 @@ require("lazy").setup({
     { import = "plugins" },
   },
   -- Configure any options here
-  checker = { enabled = true }, -- automatically check for plugin updates
-  change_detection = { notify = false }, -- disable notifications for config changes
+  checker = { enabled = false }, -- automatically check for plugin updates
+  change_detection = { 
+        enabled = false,
+        notify = false,
+  }, -- disable notifications for config changes
 })
 
 -- Load your other modules
