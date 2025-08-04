@@ -29,6 +29,15 @@ require("lazy").setup({
   }, -- disable notifications for config changes
 })
 
+-- No auto indent
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "*",
+  callback = function()
+    vim.opt.formatoptions:remove({ "r", "o" })
+  end,
+})
+
+
 -- Load your other modules
 require("options")
 require("mappings")

@@ -1,7 +1,7 @@
 {
     "layer": "top",
     "position": "top",
-    "height": 56,
+    "height": 72,
     "spacing": 4,
     "modules-left": ["sway/workspaces", "sway/mode"],
     "modules-center": ["sway/window"],
@@ -62,7 +62,7 @@
             "phone": "📱",
             "portable": "📱",
             "car": "🚗",
-            "default": ["🔈", "🔊", "🔊"]
+            "default": [" ", " ", " "]
         },
         "tooltip": false,
 	"swap-icon-label": true
@@ -84,8 +84,8 @@
             "critical": 15
         },
         "format": "{icon} {capacity}%",
-        "format-charging": "🔌 {capacity}%",
-        "format-plugged": "🔌 {capacity}%",
+        "format-charging": "󱐋 {capacity}%",
+        "format-plugged": "󱐋 {capacity}%",
         "format-alt": "{time} {icon}",
         "format-icons": ["", "", "", "", ""],
         "tooltip": false,
@@ -94,7 +94,7 @@
     },
     
     "network": {
-        "format-wifi": "📶 {signalStrength}%",
+        "format-wifi": "  {signalStrength}%",
         "format-ethernet": "🌐 Connected",
         "format-disconnected": "",
         "tooltip-format": "{ifname}: {ipaddr}/{cidr}",

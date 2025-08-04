@@ -31,8 +31,11 @@ set $menu wofi
 # My preferred locking menu
 set $locker swaylock
 
+# My preferred calculator
+set $calc qalculate-gtk
+
 ### Output configuration ---------------------------------------
-#output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+#output * bg ~/Pictures/bgs/black.jpg fill
 output * resolution 2560x1600@90Hz scale 1
 output * scale 1
 
@@ -132,9 +135,11 @@ seat * hide_cursor when-typing enable
     # Open file manager
     bindsym $mod+t exec $fman
 
+    # Open calculator
+    bindsym XF86Calculator exec $calc
+
     # Special key to take a screenshot with grim
     bindsym Print exec grim -g "$(slurp)" - | swappy -f - -o ~/Pictures/screenshots/ss-$(date +%s).png
-
 
     # Drag floating windows by holding down $mod and left mouse button
     floating_modifier $mod normal

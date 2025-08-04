@@ -48,7 +48,6 @@ return {
         show_tab_indicators = true,
         show_duplicate_prefix = true,  -- Help distinguish similar names
         persist_buffer_sort = true,
-        separator_style = "thin",  -- Less space-consuming separators
         always_show_bufferline = true,
         
         -- Sidebar integration
@@ -81,92 +80,129 @@ return {
         end,
       },
       
-      -- Custom highlights for black background with dark gray selected tab
+      -- Fixed highlights section with proper transparency
       highlights = {
         background = {
-          bg = '#000000',
-          fg = '#888888',
+          bg = 'NONE',
+          fg = '#888888',  -- Keep text visible, not NONE
         },
         buffer_selected = {
-          bg = '#404040',
-          fg = '#ffffff',
+          bg = '#000000',  -- Black background for selected tab
+          fg = '#ffffff',  -- White text for selected tab
           bold = true,
         },
         buffer_visible = {
-          bg = '#000000',
+          bg = 'NONE',
           fg = '#cccccc',
         },
         close_button = {
-          bg = '#000000',
+          bg = 'NONE',
           fg = '#888888',
         },
         close_button_selected = {
-          bg = '#404040',
+          bg = '#000000',
           fg = '#ffffff',
         },
         close_button_visible = {
-          bg = '#000000',
+          bg = 'NONE',
           fg = '#cccccc',
         },
         fill = {
-          bg = '#000000',
+          bg = 'NONE',  -- This is crucial for transparency
         },
         indicator_selected = {
-          bg = '#404040',
+          bg = '#000000',
           fg = '#ffffff',
         },
         modified = {
-          bg = '#000000',
+          bg = 'NONE',
           fg = '#ffffff',
         },
         modified_selected = {
-          bg = '#404040',
+          bg = '#000000',
           fg = '#ffffff',
         },
         modified_visible = {
-          bg = '#000000',
+          bg = 'NONE',
           fg = '#999900',
         },
         numbers = {
-          bg = '#000000',
+          bg = 'NONE',
           fg = '#888888',
         },
         numbers_selected = {
-          bg = '#404040',
+          bg = '#000000',
           fg = '#ffffff',
           bold = true,
         },
         numbers_visible = {
-          bg = '#000000',
+          bg = 'NONE',
           fg = '#cccccc',
         },
         separator = {
-          bg = '#000000',
-          fg = '#000000',
+          bg = 'NONE',
+          fg = 'NONE',
         },
         separator_selected = {
-          bg = '#404040',
-          fg = '#000000',
+          bg = '#000000',
+          fg = 'NONE',
         },
         separator_visible = {
-          bg = '#000000',
-          fg = '#000000',
+          bg = 'NONE',
+          fg = 'NONE',
         },
         tab = {
-          bg = '#000000',
+          bg = 'NONE',
           fg = '#888888',
         },
         tab_selected = {
-          bg = '#404040',
+          bg = '#000000',
           fg = '#ffffff',
           bold = true,
         },
         tab_close = {
+          bg = 'NONE',
+          fg = '#888888',
+        },
+        -- Additional highlight groups that might interfere
+        duplicate_selected = {
           bg = '#000000',
+          fg = '#ffffff',
+          bold = true,
+        },
+        duplicate_visible = {
+          bg = 'NONE',
+          fg = '#cccccc',
+        },
+        duplicate = {
+          bg = 'NONE',
+          fg = '#888888',
+        },
+        pick_selected = {
+          bg = '#000000',
+          fg = '#ffffff',
+          bold = true,
+        },
+        pick_visible = {
+          bg = 'NONE',
+          fg = '#cccccc',
+        },
+        pick = {
+          bg = 'NONE',
           fg = '#888888',
         },
       },
     })
+
+        -- Force filler line transparency even after colorscheme reload
+    vim.api.nvim_create_autocmd("ColorScheme", {
+    pattern = "*",
+    callback = function()
+        vim.cmd("highlight BufferLineFill guibg=NONE")
+        vim.cmd("highlight BufferLineBackground guibg=NONE")
+    end,
+    })
+
 
     -- Custom function to go to buffer by visual position
     local function go_to_buffer_by_position(pos)

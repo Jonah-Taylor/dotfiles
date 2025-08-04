@@ -2,10 +2,12 @@
     border: none;
     border-radius: 0;
     font-family: "JetBrainsMono Nerd Font", "Cascade Mono", monospace;
-    font-size: 30px;
+    font-size: 34px;
     min-height: 0;
     padding-top: 3px;
     color: #ffffff;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
 }
 
 window#waybar {
@@ -13,8 +15,12 @@ window#waybar {
 }
 
 #workspaces {
-    margin: 0 8px;
-    padding-top: 0px;
+    margin: 0 12px;
+    padding: 5px 5px;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
 }
 
 #mode {
@@ -28,10 +34,9 @@ window#waybar {
     padding: 0 0px;
     background-color: transparent;
     border: none;
-    border-radius: 4px;
+    border-radius: 8px;
     margin: 0 0px;
-    font-size: 30px;
-    border-bottom: 4px solid #000000;
+    border: 6px solid transparent;
 }
 
 #workspaces button:hover {
@@ -40,7 +45,8 @@ window#waybar {
 
 #workspaces button.focused {
     background-color: rgba(255, 255, 255, 0);
-    border-bottom: 4px solid #ffffff;
+    border: 6px solid transparent;
+    border-bottom: 6px solid #ffffff;
 }
 
 #workspaces button.urgent {
@@ -48,8 +54,13 @@ window#waybar {
 }
 
 #window {
-    background-color: transparent;
-    padding: 0 15px;
+    padding: 3px 20px;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    margin: 0.30px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 30px;
+
 }
 
 #pulseaudio,
@@ -58,8 +69,11 @@ window#waybar {
 #network,
 #battery,
 #clock {
-    background-color: transparent;
-    padding: 0 14px;
-    margin: 0 2px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 30px;
+    padding: 3px 10px;
+    margin: 0px 10px;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
 }
 
