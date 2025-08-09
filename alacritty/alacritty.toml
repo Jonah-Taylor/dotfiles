@@ -1,7 +1,7 @@
 [window]
 
 # Set the background opacity (range 0.0 to 1.0)
-opacity = 0.85
+opacity = 0.95
 
 padding.x = 10
 padding.y = 10

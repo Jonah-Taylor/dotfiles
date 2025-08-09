@@ -62,7 +62,7 @@
             "phone": "📱",
             "portable": "📱",
             "car": "🚗",
-            "default": [" ", " ", " "]
+            "default": [" "]
         },
         "tooltip": false,
 	"swap-icon-label": true

@@ -35,7 +35,7 @@ set $locker swaylock
 set $calc qalculate-gtk
 
 ### Output configuration ---------------------------------------
-#output * bg ~/Pictures/bgs/black.jpg fill
+output * bg ~/Pictures/bgs/black.jpg fill
 output * resolution 2560x1600@90Hz scale 1
 output * scale 1
 
@@ -43,7 +43,7 @@ output * scale 1
 # Idle configuration
 exec swayidle -w \
          timeout 600 '$locker' \
-         timeout 630 'swaymsg "output * power off"' \
+         timeout 615 'swaymsg "output * power off"' \
          resume 'swaymsg "output * power on"' \
          before-sleep 'sleep 2 && $locker'
 # Window title formatting
@@ -54,12 +54,12 @@ exec waybar
 # Window styling ---------------------------------------
 
 # Default border styles
-default_border pixel 5
-default_floating_border normal 5
+default_border pixel 8
+default_floating_border normal 8
 
 # Force specific border styles for all new windows based on their state
-for_window [tiling] border pixel 5
-for_window [floating] border normal 5
+for_window [tiling] border pixel 8
+for_window [floating] border normal 8
 
 # Center all floating windows by default
 for_window [floating] move position center
@@ -67,8 +67,8 @@ for_window [floating] move position center
 # Coloring windows
 # class                 border  backgr. text    indicator child_border
 client.focused          #285577 #285577 #ffffff #285577  #285577
-client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
-client.unfocused        #333333 #222222 #888888 #292d2e   #222222
+client.focused_inactive #333333 #5f676a #ffffff #5f676a   #5f676a
+client.unfocused        #222222 #222222 #888888 #222222   #222222
 client.urgent           #2f343a #900000 #ffffff #900000   #900000
 client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 client.background       #ffffff
@@ -77,11 +77,11 @@ client.background       #ffffff
 title_align center
 
 # Apply the correct border style on startup/reload
-exec_always --no-startup-id "swaymsg '[tiling] border pixel 5; [floating] border normal 5'"
+exec_always --no-startup-id "swaymsg '[tiling] border pixel 8; [floating] border normal 5'"
 
 # Window gaps
 gaps inner 18
-gaps outer 18
+gaps outer 0
 
 # Make "File Upload" dialog float with a fixed size
 for_window [class="LibreWolf" window_role="GtkFileChooserDialog"] floating enable, resize set 1200 1000, move position center
@@ -99,11 +99,13 @@ input type:touchpad {
     drag_lock disabled
 }
 
+mouse_warping container
+
 # Define Power Options Mode
 
 mode "power" {
     bindsym l exec --no-startup-id '$locker', mode "default"
-    bindsym s exec --no-startup-id '$locker'; systemctl suspend, mode "default"
+    bindsym s exec --no-startup-id sh -c '$locker && systemctl suspend', mode "default"
     bindsym r exec --no-startup-id systemctl reboot, mode "default"
     bindsym p exec --no-startup-id systemctl poweroff, mode "default"
 

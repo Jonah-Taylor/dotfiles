@@ -1,5 +1,5 @@
 return {
-  'akinsho/bufferline.nvim',
+    'akinsho/bufferline.nvim',
   version = '*',
   dependencies = { 'nvim-tree/nvim-web-devicons' },
   event = 'VimEnter',
@@ -83,8 +83,8 @@ return {
       -- Fixed highlights section with proper transparency
       highlights = {
         background = {
-          bg = 'NONE',
-          fg = '#888888',  -- Keep text visible, not NONE
+          bg = '#000000',
+          fg = '#888888',  -- Keep text visible, not #000000
         },
         buffer_selected = {
           bg = '#000000',  -- Black background for selected tab
@@ -100,7 +100,7 @@ return {
           fg = '#888888',
         },
         close_button_selected = {
-          bg = '#000000',
+          bg = 'NONE',
           fg = '#ffffff',
         },
         close_button_visible = {
@@ -108,7 +108,7 @@ return {
           fg = '#cccccc',
         },
         fill = {
-          bg = 'NONE',  -- This is crucial for transparency
+          bg = '#000000',  -- This is crucial for transparency
         },
         indicator_selected = {
           bg = '#000000',
@@ -141,22 +141,22 @@ return {
         },
         separator = {
           bg = 'NONE',
-          fg = 'NONE',
+          fg = '#000000',
         },
         separator_selected = {
-          bg = '#000000',
-          fg = 'NONE',
+          bg = 'NONE',
+          fg = '#000000',
         },
         separator_visible = {
           bg = 'NONE',
-          fg = 'NONE',
+          fg = '#000000',
         },
         tab = {
           bg = 'NONE',
           fg = '#888888',
         },
         tab_selected = {
-          bg = '#000000',
+          bg = 'NONE',
           fg = '#ffffff',
           bold = true,
         },
@@ -166,7 +166,7 @@ return {
         },
         -- Additional highlight groups that might interfere
         duplicate_selected = {
-          bg = '#000000',
+          bg = 'NONE',
           fg = '#ffffff',
           bold = true,
         },
@@ -179,7 +179,7 @@ return {
           fg = '#888888',
         },
         pick_selected = {
-          bg = '#000000',
+          bg = 'NONE',
           fg = '#ffffff',
           bold = true,
         },
@@ -198,8 +198,8 @@ return {
     vim.api.nvim_create_autocmd("ColorScheme", {
     pattern = "*",
     callback = function()
-        vim.cmd("highlight BufferLineFill guibg=NONE")
-        vim.cmd("highlight BufferLineBackground guibg=NONE")
+        vim.cmd("highlight BufferLineFill guibg=#000000")
+        vim.cmd("highlight BufferLineBackground guibg=#000000")
     end,
     })
 
