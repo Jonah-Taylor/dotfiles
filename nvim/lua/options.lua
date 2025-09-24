@@ -29,3 +29,10 @@ vim.opt.listchars = {
   precedes = '«',
   nbsp = '␣',
 }
+
+-- Errors
+vim.opt.cmdheight = 1  -- More space for error messages (default is 1)
+vim.keymap.set('n', '<leader>f', function()
+  vim.diagnostic.setqflist()
+  vim.cmd('copen')  -- Opens error list at bottom of screen
+end, { desc = 'Show all errors' })

@@ -19,6 +19,45 @@ return {
           quit_on_open = false,
         },
       },
+      renderer = {
+        icons = {
+          show = {
+            file = true,
+            folder = true,
+            folder_arrow = true,
+            git = true,
+            modified = true,
+            diagnostics = true,
+            bookmarks = true,
+          },
+          glyphs = {
+            default = "",
+            symlink = "",
+            bookmark = "BM",
+            modified = "●",
+            git = {
+              unstaged = "+",
+              staged = "✓",
+              unmerged = "",
+              renamed = "➜",
+              untracked = "",
+              deleted = "-",
+              ignored = "_",
+            },
+          },
+        },
+        indent_markers = {
+          enable = true,
+          inline_arrows = true,
+          icons = {
+            corner = "└",
+            edge = "│",
+            item = "│",
+            bottom = "─",
+            none = " ",
+          },
+        },
+      },
       on_attach = function(bufnr)
         local api = require("nvim-tree.api")
         
@@ -42,6 +81,9 @@ return {
         vim.keymap.set('n', '<2-LeftMouse>', open_stay_in_tree, { buffer = bufnr, desc = "Open and stay in tree" })
       end,
     })
+    
+    -- Hide the separator
+    vim.api.nvim_set_hl(0, "NvimTreeWinSeparator", { fg = "NONE", bg = "NONE" })
     
     -- Auto-close when last window
     vim.api.nvim_create_autocmd("QuitPre", {

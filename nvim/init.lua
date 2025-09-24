@@ -15,6 +15,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+vim.opt.scrolloff = 8 -- 8 lines of vertical margin
 -- Setup lazy.nvim
 require("lazy").setup({
   spec = {
@@ -37,6 +38,8 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+-- Remove the separator by making it invisible
+vim.api.nvim_set_hl(0, "NvimTreeWinSeparator", { fg = "NONE", bg = "NONE" })
 
 -- Load your other modules
 require("options")

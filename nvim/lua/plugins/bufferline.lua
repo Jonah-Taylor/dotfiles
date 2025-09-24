@@ -92,7 +92,7 @@ return {
           bold = true,
         },
         buffer_visible = {
-          bg = 'NONE',
+          bg = '#000000',
           fg = '#cccccc',
         },
         close_button = {
@@ -104,7 +104,7 @@ return {
           fg = '#ffffff',
         },
         close_button_visible = {
-          bg = 'NONE',
+          bg = '#000000',
           fg = '#cccccc',
         },
         fill = {
@@ -152,7 +152,7 @@ return {
           fg = '#000000',
         },
         tab = {
-          bg = 'NONE',
+          bg = '#222222',
           fg = '#888888',
         },
         tab_selected = {
@@ -215,17 +215,22 @@ return {
       end
     end
 
-    -- Set up keybindings for buffer positions 1-9 (hardcoded)
-    vim.keymap.set('n', '<leader>1', function() go_to_buffer_by_position(1) end, { desc = 'Go to buffer 1', silent = true })
-    vim.keymap.set('n', '<leader>2', function() go_to_buffer_by_position(2) end, { desc = 'Go to buffer 2', silent = true })
-    vim.keymap.set('n', '<leader>3', function() go_to_buffer_by_position(3) end, { desc = 'Go to buffer 3', silent = true })
-    vim.keymap.set('n', '<leader>4', function() go_to_buffer_by_position(4) end, { desc = 'Go to buffer 4', silent = true })
-    vim.keymap.set('n', '<leader>5', function() go_to_buffer_by_position(5) end, { desc = 'Go to buffer 5', silent = true })
-    vim.keymap.set('n', '<leader>6', function() go_to_buffer_by_position(6) end, { desc = 'Go to buffer 6', silent = true })
-    vim.keymap.set('n', '<leader>7', function() go_to_buffer_by_position(7) end, { desc = 'Go to buffer 7', silent = true })
-    vim.keymap.set('n', '<leader>8', function() go_to_buffer_by_position(8) end, { desc = 'Go to buffer 8', silent = true })
-    vim.keymap.set('n', '<leader>9', function() go_to_buffer_by_position(9) end, { desc = 'Go to buffer 9', silent = true })
+    local function delete_buffer_by_position(pos)
+        local state = require('bufferline.state')
+        if state.components and state.components[pos] then
+            vim.cmd('bdelete! ' .. state.components[pos].id)
+        end
+    end
+
+    -- Set up keybindings for buffer positions 1-9
+    for i = 1, 9 do
+        vim.keymap.set('n', '<leader>' .. i, function() go_to_buffer_by_position(i) end, 
+            { desc = 'Go to buffer ' .. i, silent = true })
+        vim.keymap.set('n', '<leader>c' .. i, function() delete_buffer_by_position(i) end, 
+            { desc = 'Delete buffer ' .. i, silent = true })
+    end
   end,
+
   keys = {
     { '<Tab>', '<Cmd>BufferLineCycleNext<CR>' },
     { '<S-Tab>', '<Cmd>BufferLineCyclePrev<CR>' },
