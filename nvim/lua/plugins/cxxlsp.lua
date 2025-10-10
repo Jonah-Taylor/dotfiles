@@ -2,7 +2,8 @@ return {
   {
     "neovim/nvim-lspconfig",
     config = function()
-      require'lspconfig'.clangd.setup{
+      -- New way: Use vim.lsp.config instead of require('lspconfig')
+      vim.lsp.config('clangd', {
         cmd = {
           "clangd", 
           "--background-index",
@@ -13,17 +14,20 @@ return {
           "--cross-file-rename",
         },
         filetypes = {"c", "cpp", "objc", "objcpp"},
-        root_dir = require('lspconfig').util.root_pattern(
+        root_markers = {
           'compile_commands.json',
           'compile_flags.txt', 
           '.clangd',
           '.git',
           'Makefile'
-        ),
+        },
         on_attach = function(client, bufnr)
           client.server_capabilities.semanticTokensProvider = nil
         end
-      }
+      })
+      
+      -- Enable clangd
+      vim.lsp.enable('clangd')
       
       vim.diagnostic.config({
         virtual_text = true,
