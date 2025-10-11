@@ -44,3 +44,4 @@ vim.api.nvim_set_hl(0, "NvimTreeWinSeparator", { fg = "NONE", bg = "NONE" })
 -- Load your other modules
 require("options")
 require("mappings")
+require("mania")
