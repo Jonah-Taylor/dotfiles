@@ -28,8 +28,6 @@ vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
     highlight link MyLangComment     Comment
     highlight link MyLangSpecial     Special
     highlight link MyLangTodo        Todo
-
-    " Optional / extra highlights
     highlight link MyLangFunction    Function
     highlight link MyLangIdentifier  Identifier
     highlight link MyLangConditional Conditional

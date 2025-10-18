@@ -17,7 +17,7 @@ set $up k
 set $right l
 
 # Your preferred terminal emulator
-set $term alacritty
+set $term ghostty
 
 # My preferred browser
 set $browser librewolf
@@ -123,7 +123,8 @@ seat * hide_cursor when-typing enable
 ### Key bindings ---------------------------------------
 
     # Start a terminal
-    bindsym $mod+Return exec $term -e ~/.config/tmux/tmux-start.sh
+    bindsym $mod+Return exec $term
+    ### -e ~/.config/tmux/tmux-start.sh
 
     # Kill focused window
     bindsym $mod+q kill

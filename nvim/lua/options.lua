@@ -18,6 +18,10 @@ vim.opt.smartindent = true
 vim.opt.autoindent = true
 vim.opt.shiftround = true
 
+vim.opt.wrap = true
+vim.opt.linebreak = true
+vim.opt.breakindent = true
+
 -- Show space chars
 vim.opt.list = true
 vim.opt.listchars = {

@@ -1,0 +1,242 @@
+# ============================================================================
+# GHOSTTY CONFIGURATION
+# ============================================================================
+
+# ----------------------------------------------------------------------------
+# APPEARANCE
+# ----------------------------------------------------------------------------
+
+# Font settings
+font-family = "JetBrainsMono Nerd Font"
+font-size = 14
+font-style = Regular
+font-style-bold = Bold
+font-style-italic = Italic
+
+# Anti-aliasing
+font-thicken = true
+
+# Colors - Gruvbox Dark Theme
+background = #000000
+foreground = #ffffff
+cursor-color = #ffffff
+cursor-text = #282828
+selection-background = #665c54
+selection-foreground = #ebdbb2
+
+window-titlebar-background = #000000
+window-titlebar-foreground = #000000
+
+# Transparency and blur
+background-opacity = 0.95
+unfocused-split-opacity = 0.90
+background-blur-radius = 0
+
+# Window padding
+window-padding-x = 10
+window-padding-y = 10
+window-padding-balance = true
+window-padding-color = background
+
+# Scrollback
+scrollback-limit = 10000
+
+# Cursor
+cursor-style = bar
+cursor-style-blink = true
+
+# Mouse scrolling
+mouse-scroll-multiplier = 4.0
+
+# ----------------------------------------------------------------------------
+# THEME COLORS (Gruvbox Dark)
+# ----------------------------------------------------------------------------
+
+# Black
+palette = 0=#282828
+palette = 8=#928374
+
+# Red
+palette = 1=#cc241d
+palette = 9=#fb4934
+
+# Green
+palette = 2=#98971a
+palette = 10=#b8bb26
+
+# Yellow
+palette = 3=#d79921
+palette = 11=#fabd2f
+
+# Blue
+palette = 4=#458588
+palette = 12=#83a598
+
+# Magenta
+palette = 5=#b16286
+palette = 13=#d3869b
+
+# Cyan
+palette = 6=#689d6a
+palette = 14=#8ec07c
+
+# White
+palette = 7=#ffffff
+palette = 15=#ffffff
+
+# ----------------------------------------------------------------------------
+# WINDOW SETTINGS
+# ----------------------------------------------------------------------------
+
+# Window decorations
+window-decoration = true
+window-theme = dark
+
+# Resize overlay
+resize-overlay = always
+resize-overlay-position = center
+
+# ----------------------------------------------------------------------------
+# BEHAVIOR
+# ----------------------------------------------------------------------------
+
+# Shell
+#command = /bin/zsh
+
+# Copy/paste
+clipboard-read = allow
+clipboard-write = allow
+clipboard-trim-trailing-spaces = true
+clipboard-paste-protection = true
+clipboard-paste-bracketed-safe = true
+
+# Mouse
+mouse-hide-while-typing = true
+
+# Links
+link-url = true
+
+# Shell integration
+shell-integration = detect
+shell-integration-features = cursor,sudo,title
+
+# Confirm before closing
+confirm-close-surface = false
+quit-after-last-window-closed = true
+
+# ----------------------------------------------------------------------------
+# KEYBINDINGS
+# ----------------------------------------------------------------------------
+
+# Splits with Alt
+keybind = alt+'=new_split:right
+keybind = alt+;=new_split:down
+
+# Navigate splits
+keybind = alt+h=goto_split:left
+keybind = alt+l=goto_split:right
+keybind = alt+k=goto_split:top
+keybind = alt+j=goto_split:bottom
+
+# Resize splits
+keybind = alt+shift+h=resize_split:left,100
+keybind = alt+shift+l=resize_split:right,100
+keybind = alt+shift+k=resize_split:up,100
+keybind = alt+shift+j=resize_split:down,100
+
+# Equalize splits
+keybind = alt+equal=equalize_splits
+
+# Tabs
+keybind = alt+enter=new_tab
+keybind = alt+t=new_tab
+keybind = alt+1=goto_tab:1
+keybind = alt+2=goto_tab:2
+keybind = alt+3=goto_tab:3
+keybind = alt+4=goto_tab:4
+keybind = alt+5=goto_tab:5
+keybind = alt+6=goto_tab:6
+keybind = alt+7=goto_tab:7
+keybind = alt+8=goto_tab:8
+keybind = alt+9=goto_tab:9
+keybind = alt+0=goto_tab:10
+
+# Navigate tabs
+keybind = alt+shift+right=next_tab
+keybind = alt+shift+left=previous_tab
+keybind = alt+n=next_tab
+keybind = alt+p=previous_tab
+
+# Close
+keybind = alt+q=close_surface
+keybind = alt+shift+q=quit
+
+# New window
+keybind = alt+shift+n=new_window
+
+# Reload config
+keybind = alt+r=reload_config
+
+# Copy/Paste
+keybind = ctrl+shift+c=copy_to_clipboard
+keybind = ctrl+shift+v=paste_from_clipboard
+
+# Font size
+keybind = ctrl+equal=increase_font_size:1
+keybind = ctrl+minus=decrease_font_size:1
+keybind = ctrl+0=reset_font_size
+
+# Scrollback
+keybind = ctrl+shift+k=scroll_page_up
+keybind = ctrl+shift+j=scroll_page_down
+keybind = ctrl+shift+home=scroll_to_top
+keybind = ctrl+shift+end=scroll_to_bottom
+
+# Clear screen
+keybind = ctrl+l=clear_screen
+
+# Toggle fullscreen
+keybind = f11=toggle_fullscreen
+
+# Inspector (debugging)
+keybind = ctrl+shift+i=inspector:toggle
+
+# ----------------------------------------------------------------------------
+# PERFORMANCE
+# ----------------------------------------------------------------------------
+
+# Focus follows mouse
+focus-follows-mouse = false
+
+# ----------------------------------------------------------------------------
+# BELL
+# ----------------------------------------------------------------------------
+
+bell-features = no-system, no-audio, no-attention, no-title, no-border
+
+# ----------------------------------------------------------------------------
+# ADVANCED
+# ----------------------------------------------------------------------------
+
+# Working directory
+working-directory = inherit
+
+# Auto-update (if built with update support)
+auto-update = check
+
+# GTK settings (Linux)
+gtk-single-instance = false
+gtk-titlebar = false
+gtk-tabs-location = top
+
+# Bold text
+bold-is-bright = false
+
+# Minimum contrast ratio
+minimum-contrast = 1.0
+
+# ----------------------------------------------------------------------------
+# MACOS SPECIFIC (still work on Linux for Alt key handling)
+# ----------------------------------------------------------------------------
+
+macos-option-as-alt = true
