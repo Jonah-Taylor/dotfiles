@@ -1,13 +1,15 @@
 
--- Theme
 vim.cmd([[colorscheme gruvbox]])
 
--- System clipboard
 vim.opt.clipboard = "unnamed,unnamedplus"
 
 -- Line numbers
 vim.opt.number = true
 vim.opt.relativenumber=true
+
+-- Timeout
+vim.opt.timeoutlen = 1000
+vim.opt.ttimeoutlen = 500
 
 -- Indenting and tabbing
 vim.opt.tabstop = 4

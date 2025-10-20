@@ -216,17 +216,18 @@ return {
     end
 
     local function delete_buffer_by_position(pos)
-        local state = require('bufferline.state')
-        if state.components and state.components[pos] then
-            vim.cmd('bdelete! ' .. state.components[pos].id)
-        end
+    local state = require('bufferline.state')
+    if state.components and state.components[pos] then
+        vim.cmd('bwipeout! ' .. state.components[pos].id)
+        vim.cmd('redraw!')  -- Force a complete redraw
+    end
     end
 
     -- Set up keybindings for buffer positions 1-9
-    for i = 1, 9 do
-        vim.keymap.set('n', '<leader>' .. i, function() go_to_buffer_by_position(i) end, 
+    for i = 1, 99 do
+        vim.keymap.set('n', i .. '<CR>', function() go_to_buffer_by_position(i) end, 
             { desc = 'Go to buffer ' .. i, silent = true })
-        vim.keymap.set('n', '<leader>c' .. i, function() delete_buffer_by_position(i) end, 
+        vim.keymap.set('n', i .. 'c', function() delete_buffer_by_position(i) end, 
             { desc = 'Delete buffer ' .. i, silent = true })
     end
   end,
@@ -234,7 +235,7 @@ return {
   keys = {
     { '<Tab>', '<Cmd>BufferLineCycleNext<CR>' },
     { '<S-Tab>', '<Cmd>BufferLineCyclePrev<CR>' },
-    { '<leader>cb', '<Cmd>bd<CR>' },
+    { '<leader>cc', '<Cmd>bd<CR>' },
     
     -- Additional useful keybindings
     { '<leader>bp', '<Cmd>BufferLinePick<CR>' },

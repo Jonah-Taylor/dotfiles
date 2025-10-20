@@ -4,8 +4,9 @@ format = """
 $username\
 $directory\
 $git_branch\
-$git_status\
 $character"""
+
+#$git_status\
 
 [git_branch]
 symbol = " "

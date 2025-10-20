@@ -35,13 +35,13 @@ return {
       -- Configure clangd using vim.lsp.config
       vim.lsp.config('clangd', {
         cmd = {
-          "clangd", 
-          "--background-index",
-          "--header-insertion=never",
-          "--completion-style=bundled",
-          "--function-arg-placeholders=false",
-          "--clang-tidy",
-          "--cross-file-rename",
+            "clangd", 
+            "--background-index=false",  -- Disable background indexing
+            "--header-insertion=never",
+            "--completion-style=bundled",
+            "--function-arg-placeholders=false",
+            "--clang-tidy=false",  -- Disable clang-tidy
+            "--cross-file-rename",
         },
         filetypes = {"c", "cpp", "objc", "objcpp"},
         root_markers = {
@@ -112,58 +112,54 @@ return {
       })
       
       -- Automatically show diagnostic float on cursor hold
-      vim.api.nvim_create_autocmd("CursorHold", {
+        vim.api.nvim_create_autocmd("CursorHold", {
         callback = function()
-          -- Get cursor position relative to window
-          local window_height = vim.api.nvim_win_get_height(0)
-          local cursor_screen_line = vim.fn.winline()
-          
-          -- Determine if cursor is in top or bottom half of screen
-          local in_top_half = cursor_screen_line <= (window_height / 2)
-          
-          -- Get diagnostics at cursor
-          local diagnostics = vim.diagnostic.get(0, { lnum = vim.fn.line(".") - 1 })
-          if #diagnostics == 0 then
-            return
-          end
-          
-          -- Format diagnostic messages
-          local lines = {}
-          local highlights = {}
-          for i, diagnostic in ipairs(diagnostics) do
-            local line_text = string.format("%s", diagnostic.message)
-            table.insert(lines, line_text)
-            
-            -- Determine highlight group based on severity
-            local hl_group
-            if diagnostic.severity == vim.diagnostic.severity.ERROR then
-              hl_group = "DiagnosticError"
-            elseif diagnostic.severity == vim.diagnostic.severity.WARN then
-              hl_group = "DiagnosticWarn"
-            elseif diagnostic.severity == vim.diagnostic.severity.HINT then
-              hl_group = "DiagnosticHint"
-            else
-              hl_group = "DiagnosticInfo"
+            local window_height = vim.api.nvim_win_get_height(0)
+            local cursor_screen_line = vim.fn.winline()
+            local in_top_half = cursor_screen_line <= (window_height / 2)
+
+            -- Get diagnostics at cursor
+            local diagnostics = vim.diagnostic.get(0, { lnum = vim.fn.line(".") - 1 })
+            if #diagnostics == 0 then return end
+
+            local lines = {}
+            local highlights = {}
+
+            for _, diagnostic in ipairs(diagnostics) do
+            -- Split multi-line messages into separate lines
+            local split_lines = vim.split(diagnostic.message, "\n", true)
+            for _, line_text in ipairs(split_lines) do
+                table.insert(lines, line_text)
+
+                -- Determine highlight group
+                local hl_group
+                if diagnostic.severity == vim.diagnostic.severity.ERROR then
+                hl_group = "DiagnosticError"
+                elseif diagnostic.severity == vim.diagnostic.severity.WARN then
+                hl_group = "DiagnosticWarn"
+                elseif diagnostic.severity == vim.diagnostic.severity.HINT then
+                hl_group = "DiagnosticHint"
+                else
+                hl_group = "DiagnosticInfo"
+                end
+
+                table.insert(highlights, { line = #lines - 1, hl_group = hl_group })
             end
-            
-            table.insert(highlights, { line = i - 1, hl_group = hl_group })
-          end
-          
-          -- Create buffer for float
-          local buf = vim.api.nvim_create_buf(false, true)
-          vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
-          
-          -- Apply highlights
-          for _, hl in ipairs(highlights) do
+            end
+
+            -- Create floating buffer
+            local buf = vim.api.nvim_create_buf(false, true)
+            vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
+
+            -- Apply highlights
+            for _, hl in ipairs(highlights) do
             vim.api.nvim_buf_add_highlight(buf, -1, hl.hl_group, hl.line, 0, -1)
-          end
-          
-          -- Calculate position
-          local win_width = vim.api.nvim_win_get_width(0)
-          local float_width = math.min(80, win_width - 4)
-          
-          -- Position at top or bottom of current window
-          local win_config = {
+            end
+
+            local win_width = vim.api.nvim_win_get_width(0)
+            local float_width = math.min(80, win_width - 4)
+
+            local win_config = {
             relative = "win",
             width = float_width,
             height = math.min(#lines, 10),
@@ -172,24 +168,22 @@ return {
             style = "minimal",
             border = "rounded",
             focusable = false,
-          }
-          
-          -- Create the floating window
-          local float_win = vim.api.nvim_open_win(buf, false, win_config)
-          
-          -- Close on cursor move
-          vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI", "BufLeave", "InsertEnter" }, {
+            }
+
+            local float_win = vim.api.nvim_open_win(buf, false, win_config)
+
+            -- Close float on cursor move
+            vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI", "BufLeave", "InsertEnter" }, {
             buffer = vim.api.nvim_get_current_buf(),
             once = true,
             callback = function()
-              if vim.api.nvim_win_is_valid(float_win) then
+                if vim.api.nvim_win_is_valid(float_win) then
                 vim.api.nvim_win_close(float_win, true)
-              end
+                end
             end
-          })
+            })
         end
-      })
-      
+        })
       vim.opt.updatetime = 250
     end,
   },

@@ -228,7 +228,7 @@ auto-update = check
 # GTK settings (Linux)
 gtk-single-instance = false
 gtk-titlebar = false
-gtk-tabs-location = top
+gtk-tabs-location = bottom
 gtk-custom-css = ~/.config/ghostty/custom.css
 
 # Bold text
